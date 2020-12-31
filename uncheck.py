@@ -11,7 +11,7 @@ def check(username):
     url = api + endpoint.format(username)
     h = { 'Authorization': f'Bearer {auth["bearer"]}' }
 
-    r = requests.get(api + endpoint.format(username), headers=h)
+    r = requests.get(url, headers=h)
     r = json.loads(r.content)
 
     if 'errors' in r:
