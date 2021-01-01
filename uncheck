@@ -8,3 +8,7 @@ check() {
 
   [[ $err =~ "Could not find user" ]] && true
 }
+
+notify() {
+  notify-send -t 0 uncheck "username $1 available on twitter"
+}
