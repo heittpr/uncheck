@@ -12,3 +12,8 @@ check() {
 notify() {
   notify-send -t 0 uncheck "username $1 available on twitter"
 }
+
+while true; do
+  check $1 && notify $1
+  sleep 30m
+done
