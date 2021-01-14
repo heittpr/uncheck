@@ -1,6 +1,6 @@
-#!/bin/bash
+#!/bin/sh
 
-[ -f auth ] || (echo "no auth file"; exit) && source auth
+[ -f auth ] || { echo "no auth file"; exit; } && bearer=`cat auth`
 
 usage() {
   echo "usage: uncheck [username]"
