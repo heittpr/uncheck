@@ -12,8 +12,11 @@ usage() {
 check() {
   api="https://api.twitter.com/2/users/by/username/" 
   err=$(curl -s "$api$1" -H "Authorization: Bearer $bearer" | jq -r '.errors[]? | .detail')
-
-  [[ $err =~ "Could not find user" ]] && true
+ 
+  case $err in
+    "Could not find user"*) true   ;;
+    *)                      false  ;;
+  esac
 }
 
 notify() {
