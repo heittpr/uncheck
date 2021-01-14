@@ -1,6 +1,7 @@
 #!/bin/sh
 
-[ -f auth ] || { echo "no auth file"; exit; } && bearer=`cat auth`
+auth="$XDG_DATA_HOME/uncheck/auth"
+[ -f $auth ] || { echo "no auth file"; exit; } && bearer=`cat $auth`
 
 usage() {
   echo "usage: uncheck [username]"
@@ -23,7 +24,4 @@ notify() {
   notify-send -t 0 uncheck "username $1 available on twitter"
 }
 
-while true; do
-  check $1 && notify $1
-  sleep 30m
-done
+check $1 && notify $1
