@@ -4,11 +4,21 @@ auth="$XDG_DATA_HOME/uncheck/auth"
 [ -f $auth ] || { echo "no auth file"; exit; } && bearer=`cat $auth`
 
 usage() {
-  echo "usage: uncheck [username]"
-  exit
+  echo "usage: uncheck [options] username"
+  echo ""
+  echo "options:"
+  echo "  -h: shows this help message and exits"
+  
+  exit 1
 }
 
-[ -z $1 ] && usage
+while getopts "h" o; do
+  case "$o" in
+    h) usage ;;
+  esac
+done
+
+shift $((OPTIND - 1))
 
 check() {
   api="https://api.twitter.com/2/users/by/username/" 
@@ -23,5 +33,3 @@ check() {
 notify() {
   notify-send -t 0 uncheck "username $1 available on twitter"
 }
-
-check $1 && notify $1
